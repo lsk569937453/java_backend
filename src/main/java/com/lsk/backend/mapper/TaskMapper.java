@@ -15,6 +15,14 @@ import java.util.List;
  */
 @Mapper
 public interface TaskMapper extends BaseMapper<TaskEntity> {
+    /*
+    *
+     * @Author shikai.liu
+     * @Description //TODO 
+     * @Date 8:28 上午 2020/8/26
+     * @Param [likeId]
+     * @return java.util.List<com.lsk.backend.entity.TaskEntity>
+     **/
     List<TaskEntity> getTask(String likeId);
 
 }

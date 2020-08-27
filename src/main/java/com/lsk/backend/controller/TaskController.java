@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/api/task")
-public class TaskCrontroller {
+public class TaskController {
     @Autowired
     private TaskService taskService;
 
     @PostMapping(value = "/add",produces = "application/json;charset=UTF-8")
-    public String pressureTest(@RequestBody TaskInsertReq taskInsertReq) {
+    public String addTask(@RequestBody TaskInsertReq taskInsertReq) {
         String sql = "update t_user set name = ? where id = ?";
         taskService.getAllTask();
         return "a";

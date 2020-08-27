@@ -3,6 +3,7 @@ package com.lsk.backend.service.impl;
 import com.lsk.backend.entity.TaskEntity;
 import com.lsk.backend.mapper.TaskMapper;
 import com.lsk.backend.service.TaskService;
+import com.lsk.backend.vojo.http.TaskInsertReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,15 @@ public class TaskServiceImpl implements TaskService
         List<TaskEntity> users = taskMapper.selectByMap(columnMap);
         List<TaskEntity> users2=taskMapper.getTask("3");
         return users;
+    }
+
+    @Override
+    public void addTask(TaskInsertReq taskInsertReq) {
+        TaskEntity taskEntity=new TaskEntity();
+        taskEntity.setTaskCron(taskInsertReq.getCronExpression());
+        taskEntity.setTaskName(taskInsertReq.getName());
+        taskEntity.setUrl(taskInsertReq.getUrl());
+        taskEntity.setUserId("-1");
+        taskMapper.insert(taskEntity);
     }
 }

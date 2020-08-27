@@ -1,7 +1,9 @@
 package com.lsk.backend.service;
 
 import com.lsk.backend.entity.TaskEntity;
+import com.lsk.backend.vojo.http.TaskDelByIdReq;
 import com.lsk.backend.vojo.http.TaskInsertReq;
+import com.lsk.backend.vojo.http.TaskUpdateReq;
 
 import java.util.List;
 import java.util.Map;
@@ -43,4 +45,25 @@ public interface TaskService
      * @return java.util.List<com.lsk.backend.entity.TaskEntity>
      **/
     public List<TaskEntity>getTaskByCondition(Map<String,Object> condition);
+
+
+    /*
+    *
+     * @Author shikai.liu
+     * @Description //TODO
+     * @Date 4:43 下午 2020/8/27
+     * @Param [taskInsertReq]
+     * @return void
+     **/
+    public void updateTask(TaskUpdateReq taskInsertReq);
+    
+    /*
+    *
+     * @Author shikai.liu
+     * @Description //TODO
+     * @Date 5:36 下午 2020/8/27
+     * @Param [req]
+     * @return void
+     **/
+    public void delTaskById(TaskDelByIdReq req);
 }

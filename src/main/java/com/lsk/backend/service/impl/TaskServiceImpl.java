@@ -3,7 +3,9 @@ package com.lsk.backend.service.impl;
 import com.lsk.backend.entity.TaskEntity;
 import com.lsk.backend.mapper.TaskMapper;
 import com.lsk.backend.service.TaskService;
+import com.lsk.backend.vojo.http.TaskDelByIdReq;
 import com.lsk.backend.vojo.http.TaskInsertReq;
+import com.lsk.backend.vojo.http.TaskUpdateReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +44,26 @@ public class TaskServiceImpl implements TaskService
         taskEntity.setUrl(taskInsertReq.getUrl());
         taskEntity.setUserId("-1");
         taskMapper.insert(taskEntity);
+    }
+
+    @Override
+    public List<TaskEntity> getTaskByCondition(Map<String, Object> condition) {
+        return taskMapper.selectByMap(condition);
+    }
+
+    @Override
+    public void updateTask(TaskUpdateReq taskUpdateReq) {
+        TaskEntity taskEntity=new TaskEntity();
+        taskEntity.setTaskCron(taskUpdateReq.getCronExpression());
+        taskEntity.setId(taskUpdateReq.getId());
+        taskEntity.setUrl(taskUpdateReq.getUrl());
+        taskMapper.updateById(taskEntity);
+
+    }
+
+    @Override
+    public void delTaskById(TaskDelByIdReq req) {
+        taskMapper.deleteById(req.getId());
+
     }
 }

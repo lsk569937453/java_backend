@@ -6,6 +6,9 @@ import com.lsk.backend.service.TaskService;
 import com.lsk.backend.vojo.http.TaskDelByIdReq;
 import com.lsk.backend.vojo.http.TaskInsertReq;
 import com.lsk.backend.vojo.http.TaskUpdateReq;
+import io.lettuce.core.api.sync.RedisCommands;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +26,12 @@ import java.util.Map;
 @Service
 public class TaskServiceImpl implements TaskService
 {
+    public static Logger logger= LoggerFactory.getLogger(TaskServiceImpl.class);
     @Autowired
     private TaskMapper taskMapper;
+
+    @Autowired
+    private RedisCommands<String,String>redisClient;
     @Override
     public List<TaskEntity> getAllTask() {
         Map<String, Object> columnMap = new HashMap<>();
@@ -43,7 +50,11 @@ public class TaskServiceImpl implements TaskService
         taskEntity.setTaskName(taskInsertReq.getName());
         taskEntity.setUrl(taskInsertReq.getUrl());
         taskEntity.setUserId("-1");
-        taskMapper.insert(taskEntity);
+        try {
+           int row= taskMapper.insert(taskEntity);
+        }catch (Exception e){
+            logger.error("",e);
+        }
     }
 
     @Override

@@ -32,14 +32,18 @@ public class ScheduleConfiguration {
 
 
             schedule = stdSchedulerFactory.getScheduler();
-            JobDetail job = JobBuilder.newJob(Task.class).withIdentity("job1", "group1").build();
-            Trigger cronTrigger = newTrigger()
-                    .withIdentity("trigger3", "group1")
-                    .withSchedule(cronSchedule("*/5 * * * * ?"))
-                    .build();
-            // 将任务和Trigger放入scheduler
 
-            schedule.scheduleJob(job, cronTrigger);
+
+            for (int i = 0; i < 2; i++) {
+                JobDetail job = JobBuilder.newJob(Task.class).withIdentity("job" + i, "group1").withDescription("" + i).build();
+                Trigger cronTrigger = newTrigger()
+                        .withIdentity("trigger" + i, "group1")
+                        .withSchedule(cronSchedule("*/5 * * * * ?"))
+                        .build();
+                // 将任务和Trigger放入scheduler
+
+                schedule.scheduleJob(job, cronTrigger);
+            }
             schedule.start();
         } catch (Exception e) {
             logger.error("", e);

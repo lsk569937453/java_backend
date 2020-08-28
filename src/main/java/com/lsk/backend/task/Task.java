@@ -12,11 +12,18 @@ import org.slf4j.LoggerFactory;
  * @Author : shikai.liu  //author
  * @Date: 2020-08-28 09:07  //Date
  */
-public class  Task implements Job {
-    public static Logger logger= LoggerFactory.getLogger(Task.class);
+public class Task implements Job {
+    public static Logger logger = LoggerFactory.getLogger(Task.class);
+
+    private int taskID;
+
+//    public Task(int taskID) {
+//        this.taskID = taskID;
+//    }
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-
-        logger.info("ssssss");
+        String des = jobExecutionContext.getJobDetail().getDescription();
+        logger.info("ssssss:" + des);
     }
 }

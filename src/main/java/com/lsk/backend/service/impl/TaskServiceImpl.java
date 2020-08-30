@@ -34,13 +34,14 @@ public class TaskServiceImpl implements TaskService
     private RedisCommands<String,String>redisClient;
     @Override
     public List<TaskEntity> getAllTask() {
-        Map<String, Object> columnMap = new HashMap<>();
-        columnMap.put("id", "30");// 写表中的列名
-
-        long start = System.currentTimeMillis();
-        List<TaskEntity> users = taskMapper.selectByMap(columnMap);
-        List<TaskEntity> users2=taskMapper.getTask("3");
-        return users;
+       Map<String, Object> columnMap = new HashMap<>();
+//        columnMap.put("id", "30");// 写表中的列名
+//
+//        long start = System.currentTimeMillis();
+//        List<TaskEntity> users = taskMapper.selectByMap(columnMap);
+//        List<TaskEntity> users2=taskMapper.getTask("3");
+        List<TaskEntity> taskEntityList= taskMapper.selectByMap(columnMap);
+        return taskEntityList;
     }
 
     @Override
